@@ -1,4 +1,4 @@
 # Instapix
 
 # Demo
-![demo](demo/demo.mov)
+![demo](demo/demo_compressed.mp4)
