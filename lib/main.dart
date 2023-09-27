@@ -56,7 +56,7 @@ class MainApp extends StatelessWidget {
                     pageTransitionType: PageTransitionType.bottomToTop,
                     curve: Curves.easeOut,
                     splashIconSize: 400,
-                    duration: 4000,
+                    duration: 3000,
                     //centered: false,
                   )
                 );

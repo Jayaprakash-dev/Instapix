@@ -46,13 +46,10 @@ void loadDependencies() {
                   user_email TEXT UNIQUE NOT NULL,
                   user_password TEXT NOT NULL
                 );
-              '''
-            );
-            await db.execute(
-              '''
+
                 CREATE TABLE posts (
                   image_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  photo BLOB NOT NULL,
+                  image TEXT NOT NULL,
                   title TEXT NOT NULL,
                   caption TEXT NOT NULL
                 );
@@ -61,8 +58,8 @@ void loadDependencies() {
           },
         );
       }
-    // FOREIGN KEY(user_id) REFERENCES user(user_id)
-     return db; 
+
+      return db; 
     },
     dispose: (db) => db.close(),
   );

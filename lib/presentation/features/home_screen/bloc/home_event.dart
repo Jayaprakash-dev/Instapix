@@ -6,7 +6,7 @@ sealed class HomeEvent {}
 final class HomeInitialEvent extends HomeEvent {}
 
 final class AddPost extends HomeEvent {
-  final Uint8List image;
+  final File image;
   final String title;
   final String caption;
 

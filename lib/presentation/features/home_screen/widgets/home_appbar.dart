@@ -13,6 +13,22 @@ class HomeAppBar extends StatefulWidget {
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
+
+  //bool _searchCloseIconVisibility = false;
+  //late final TextEditingController _searchController;
+
+  //@override
+  //void initState() {
+  //  super.initState();
+  //  _searchController = TextEditingController();
+  //}
+
+  //@override
+  //void dispose() {
+  //  _searchController.dispose();
+  //  super.dispose();
+  //}
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -135,5 +151,87 @@ class _HomeAppBarState extends State<HomeAppBar> {
       );
     }
   }
+  
+//  PreferredSizeWidget _buildSearchBar() {
+
+//    return PreferredSize(
+//      preferredSize: const Size.fromHeight(55),
+//      child: Container(
+//        height: 50,
+//        padding: const EdgeInsets.only(left: 10, right: 10),
+//        decoration: BoxDecoration(
+//          boxShadow: [
+//            BoxShadow(
+//              color: const Color.fromARGB(0, 225, 225, 225).withOpacity(1),
+//              offset: const Offset(3, 8),
+//              blurRadius: 10,
+//              spreadRadius: -7,
+//            )
+//          ]
+//        ),
+//        child: SearchAnchor(
+//          builder: (context, controller) {
+//            return SearchBar(
+//              controller: controller,
+//              padding: const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
+//              onTap: () {
+//                //controller.openView();
+//              },
+//              onChanged: (_) {
+//                //controller.openView();
+//                if (!_searchCloseIconVisibility) {
+//                  setState(() => _searchCloseIconVisibility = true);
+//                }
+//              },
+//              leading: const Icon(Icons.search, color: Colors.grey),
+//              trailing: <Widget>[
+//                Visibility(
+//                  visible: _searchCloseIconVisibility,
+//                  child: IconButton(
+//                    onPressed: () { 
+//                      controller.clear();
+//                      setState(() => _searchCloseIconVisibility = false);
+//                    },
+//                    icon: const Icon(Icons.close_rounded, color: Colors.grey)
+//                  )
+//                )
+//              ],
+//              elevation: const MaterialStatePropertyAll(0),
+//              shape: const MaterialStatePropertyAll(
+//                RoundedRectangleBorder(
+//                  borderRadius: BorderRadius.all(Radius.circular(15))
+//                )
+//              ),
+//              hintText: 'Search...',
+//              hintStyle: const MaterialStatePropertyAll(
+//                TextStyle(
+//                  color: Colors.grey
+//                )
+//              ),
+//              textStyle: const MaterialStatePropertyAll(
+//                TextStyle(
+//                  fontSize: 15,
+//                  fontWeight: FontWeight.w500
+//                )
+//              ),
+//            );
+//          },
+//          suggestionsBuilder: (context, controller) {
+//            return List<ListTile>.generate(5, (int index) {
+//              final String item = 'item $index';
+//              return ListTile(
+//                title: Text(item),
+//                onTap: () {
+//                  setState(() {
+//                    controller.closeView(item);
+//                  });
+//                },
+//              );
+//            });
+//          },
+//        ),
+//      )
+//    );
+//  }
 }
 // 7248FC - menu color

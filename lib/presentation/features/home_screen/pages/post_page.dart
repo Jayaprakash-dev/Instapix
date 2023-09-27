@@ -1,8 +1,6 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:gallery/presentation/features/home_screen/bloc/home_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,12 +21,24 @@ class _PostPageState extends State<PostPage> {
   ImageSource? _imageSource;
   final picker = ImagePicker();
   
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _captionController = TextEditingController();
+  late final TextEditingController _titleController;
+  late final TextEditingController _captionController;
+
+  @override
+  initState() {
+    super.initState();
+    _titleController = TextEditingController();
+    _captionController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _captionController.dispose();
+    super.dispose();
+  }
 
   Future getImage() async {
-
-    _showSourceOptions();
 
     await showDialog(
       context: context,
@@ -129,104 +139,80 @@ class _PostPageState extends State<PostPage> {
         ),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              child: InkWell(
-                onTap: getImage,
-                child: _image != null
-                  ? Image.file(_image!)
-                  : Container(
-                      height: 200,
-                      color: Colors.grey[300],
-                      child: const Center(
-                        child: Icon(Icons.add_a_photo),
-                      ),
-                    ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: Container(
-                height: double.infinity,
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.only(top: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        TextField(
-                          controller: _titleController,
-                          autocorrect: false,
-                          style: const TextStyle(
-                            color: Colors.black
-                          ),
-                          decoration: InputDecoration(
-                            enabledBorder: _buildInputBorderStyle(),
-                            focusedBorder: _buildInputBorderStyle(),
-                            errorBorder: _buildInputBorderStyle(),
-                            focusedErrorBorder: _buildInputBorderStyle(),
-                            label: const Text(
-                              'Post title',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 168, 170, 179),
-                                fontWeight: FontWeight.w600
-                              ),
-                            )
-                          ),
-                        ),
-                        const SizedBox(height: 30),
-                        TextField(
-                          controller: _captionController,
-                          autocorrect: false,
-                          style: const TextStyle(
-                            color: Colors.black
-                          ),
-                          decoration: InputDecoration(
-                            enabledBorder: _buildInputBorderStyle(),
-                            focusedBorder: _buildInputBorderStyle(),
-                            errorBorder: _buildInputBorderStyle(),
-                            focusedErrorBorder: _buildInputBorderStyle(),
-                            label: const Text(
-                              'Write a cpation',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 168, 170, 179),
-                                fontWeight: FontWeight.w600
-                              ),
-                            )
-                          ),
-                        ),
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: TextButton(
-                        onPressed: _handlePostCancelReq,
-                        style: ButtonStyle(
-                          backgroundColor: const MaterialStatePropertyAll(Color.fromARGB(255, 189, 38, 27)),
-                          fixedSize: const MaterialStatePropertyAll(Size(300, 45)),
-                          shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))
-                        ),
-                        child: const Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold
-                          ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                child: InkWell(
+                  onTap: getImage,
+                  child: _image != null
+                    ? Image.file(_image!)
+                    : Container(
+                        height: 200,
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: Icon(Icons.add_a_photo),
                         ),
                       ),
-                    ),
-                  ],
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 30),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextField(
+                    controller: _titleController,
+                    autocorrect: false,
+                    style: const TextStyle(
+                      color: Colors.black
+                    ),
+                    decoration: InputDecoration(
+                      enabledBorder: _buildInputBorderStyle(),
+                      focusedBorder: _buildInputBorderStyle(),
+                      errorBorder: _buildInputBorderStyle(),
+                      focusedErrorBorder: _buildInputBorderStyle(),
+                      label: const Text(
+                        'Post title',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 168, 170, 179),
+                          fontWeight: FontWeight.w600
+                        ),
+                      )
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  // caption
+                  TextField(
+                    controller: _captionController,
+                    autocorrect: false,
+                    style: const TextStyle(
+                      color: Colors.black
+                    ),
+                    decoration: InputDecoration(
+                      enabledBorder: _buildInputBorderStyle(),
+                      focusedBorder: _buildInputBorderStyle(),
+                      errorBorder: _buildInputBorderStyle(),
+                      focusedErrorBorder: _buildInputBorderStyle(),
+                      label: const Text(
+                        'Write a caption',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 168, 170, 179),
+                          fontWeight: FontWeight.w600
+                        ),
+                      )
+                    ),
+                    maxLines: null,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -267,17 +253,14 @@ class _PostPageState extends State<PostPage> {
 
       return;
     }
-
-    final Uint8List _imageData = await _image!.readAsBytes();
-
-    post(_imageData, _title, _caption);
+    post(_image!, _title, _caption);
   }
 
-  void _handlePostCancelReq() {
-    Navigator.pop(context);
-  }
+  //void _handlePostCancelReq() {
+  //  Navigator.pop(context);
+  //}
   
-  void post(Uint8List imageData, String title, String caption) {
+  void post(File imageData, String title, String caption) {
     widget.homeBloc.add(
       AddPost(
         image: imageData,
@@ -286,9 +269,5 @@ class _PostPageState extends State<PostPage> {
       )
     );
     Navigator.of(context).pop();
-  }
-  
-  void _showSourceOptions() {
-
   }
 }

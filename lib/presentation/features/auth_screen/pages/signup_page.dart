@@ -79,7 +79,7 @@ class _SignupPageState extends State<SignupPage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
-        color: const Color.fromARGB(255, 243, 243, 243),
+        color: Colors.white,
         child: Stack(
           alignment: Alignment.center,
           children: [
