@@ -1,5 +1,4 @@
 # Instapix
 
 # Demo
-https://github.com/Jayaprakash-dev/Instapix/assets/68953739/b3a0ffdd-4c1c-4e51-a6f1-3d3ac43b759c
-
+https://github.com/Jayaprakash-dev/Instapix/assets/68953739/6012e0b8-8d9b-47e3-9aeb-37424b5f3ba7
